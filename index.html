@@ -1,0 +1,1702 @@
+<html>
+<script src="papaparse.js"></script>
+<head>
+<style>body {
+    font: normal 25px Verdana, Arial, sans-serif;
+}
+</style>
+</head>
+<body>
+<p id="question"></p>
+<p id="answer"></p>
+<script>
+var data = [
+  {
+    "No.": "1.",
+    "Spec": "1.1.1a",
+    "Section": "Structure and function of the processor",
+    "Term": "ALU",
+    "Definition": "Arithmetic Logic Unit: “The part of the CPU where data is processed and manipulated.  This processing and manipulation normally consists of arithmetic operations or logical comparisons allowing a program to make decisions.”"
+  },
+  {
+    "No.": "2.",
+    "Spec": "1.1.1a",
+    "Section": "Structure and function of the processor",
+    "Term": "Control Unit",
+    "Definition": "“The part of the CPU that manages the execution of instructions. The control unit fetches each instruction in sequence, and decodes and synchronises it before executing it by sending control signals to other parts of the computer.”"
+  },
+  {
+    "No.": "3.",
+    "Spec": "1.1.1a",
+    "Section": "Structure and function of the processor",
+    "Term": "Register",
+    "Definition": "“Tiny areas of extremely fast memory located in the CPU normally designed for a specific purpose, where data or control information is stored temporarily.”"
+  },
+  {
+    "No.": "4.",
+    "Spec": "1.1.1a",
+    "Section": "Structure and function of the processor",
+    "Term": "PC",
+    "Definition": "Program Counter: “A register in the control unit which holds the address of the next instruction to be executed.”"
+  },
+  {
+    "No.": "5.",
+    "Spec": "1.1.1a",
+    "Section": "Structure and function of the processor",
+    "Term": "ACC",
+    "Definition": "Accumulator: “A special register within the ALU.  It is used to hold the data currently being processed by the central processor.  Any data to be processed is stored temporarily in the accumulator, the results ending up back in the accumulator being stored in the memory unit.”"
+  },
+  {
+    "No.": "6.",
+    "Spec": "1.1.1a",
+    "Section": "Structure and function of the processor",
+    "Term": "MAR",
+    "Definition": "Memory Address Register: “A register in the CPU that stores the address of the memory location currently in use.  In the fetch phase, this would be the address of the instruction being loaded; in the execute phase, it would be the address of the data being used.”"
+  },
+  {
+    "No.": "7.",
+    "Spec": "1.1.1a",
+    "Section": "Structure and function of the processor",
+    "Term": "MDR",
+    "Definition": "Memory Data Register: “A register in the CPU that stores data being transferred to and from the immediate-access store. It acts as a buffer, allowing the central processor and memory unit to act independently without being affected by minor differences in operation. A data item will be copied to the MDR ready for use at the next clock pulse, when it can either be used by the central processor or be stored in main memory.”"
+  },
+  {
+    "No.": "8.",
+    "Spec": "1.1.1a",
+    "Section": "Structure and function of the processor",
+    "Term": "CIR",
+    "Definition": "Current Instruction Register: “A register in the control unit that stores the address of the next instruction currently being executed and decoded.”"
+  },
+  {
+    "No.": "9.",
+    "Spec": "1.1.1a",
+    "Section": "Structure and function of the processor",
+    "Term": "Busses",
+    "Definition": "“A common physical pathway shared by signals to and from several components of a computer.”"
+  },
+  {
+    "No.": "10.",
+    "Spec": "1.1.1a",
+    "Section": "Structure and function of the processor",
+    "Term": "Data Bus",
+    "Definition": "“The part of the bus which carries the actual information.”"
+  },
+  {
+    "No.": "11.",
+    "Spec": "1.1.1a",
+    "Section": "Structure and function of the processor",
+    "Term": "Address Bus",
+    "Definition": "“The part of the bus which carries identification about where the data is being sent.”"
+  },
+  {
+    "No.": "12.",
+    "Spec": "1.1.1a",
+    "Section": "Structure and function of the processor",
+    "Term": "Control Bus",
+    "Definition": "“This bus carries command and control signals to and from every other component of a computer.”"
+  },
+  {
+    "No.": "13.",
+    "Spec": "1.1.1b",
+    "Section": "Structure and function of the processor",
+    "Term": "Fetch-Decode-Execute",
+    "Definition": "“The complete process of retrieving an instruction from store, decoding it and carrying it out.  Also known as the instruction cycle.”"
+  },
+  {
+    "No.": "14.",
+    "Spec": "1.1.1c",
+    "Section": "Structure and function of the processor",
+    "Term": "CPU",
+    "Definition": "Central Processing Unit: “The main part of the computer, consisting of the registers, ALU and control unit.”"
+  },
+  {
+    "No.": "15.",
+    "Spec": "1.1.1c",
+    "Section": "Structure and function of the processor",
+    "Term": "Clock Speed",
+    "Definition": "“Measured in Hertz, the clock speed is the frequency at which the internal clock generates pulses.  The higher the clock rate, the faster the computer may work.  The “clock” is the electronic unit that synchronises related components by generating pulses at a constant rate.”"
+  },
+  {
+    "No.": "16.",
+    "Spec": "1.1.1c",
+    "Section": "Structure and function of the processor",
+    "Term": "Cores",
+    "Definition": "“A part of a multi-core processor.  A multi-core processor is a single component with two or more independent actual CPUs, which are the units responsibly for the fetch-decode-execute cycle.”"
+  },
+  {
+    "No.": "17.",
+    "Spec": "1.1.1c",
+    "Section": "Structure and function of the processor",
+    "Term": "Cache",
+    "Definition": "“A part of the main store between the central processor and the rest of the memory.  It has extremely fast access, so sections of a program and its associated data are copied there to take advantage of its short fetch cycle.”"
+  },
+  {
+    "No.": "18.",
+    "Spec": "1.1.1d",
+    "Section": "Structure and function of the processor",
+    "Term": "Pipelining",
+    "Definition": "“Successive steps of an instruction sequence are executed in turn by a sequence of cores able to operate concurrently, so that another instruction can be begun before the previous one is finished.”"
+  },
+  {
+    "No.": "19.",
+    "Spec": "1.1.1e",
+    "Section": "Structure and function of the processor",
+    "Term": "Von Neumann Architecture",
+    "Definition": "“Traditional computer architecture that forms the basis of most digital computer systems.  A single control unit manages program control flow following a linear sequence of “fetch-decode-execute””"
+  },
+  {
+    "No.": "20.",
+    "Spec": "1.1.1e",
+    "Section": "Structure and function of the processor",
+    "Term": "Harvard Architecture",
+    "Definition": "“A computer architecture with physically separate storage and signal pathways for instructions and data. These early machines had data storage entirely contained within the central processing unit, and provided no access to the instruction storage as data.”"
+  },
+  {
+    "No.": "21.",
+    "Spec": "1.1.1e",
+    "Section": "Structure and function of the processor",
+    "Term": "Contemporary Architecture",
+    "Definition": "“Any modern set of disciplines that describes the functionality, the organisation and the implementation of computer systems.”"
+  },
+  {
+    "No.": "22.",
+    "Spec": "1.1.2a",
+    "Section": "Types of processor",
+    "Term": "CISC",
+    "Definition": "Complex Instruction Set Computer: “A design that produces a complicated and expensive integrated circuit capable of performing a large variety of complex instructions. Complex instructions can be executed with few machine cycles.”"
+  },
+  {
+    "No.": "23.",
+    "Spec": "1.1.2a",
+    "Section": "Types of processor",
+    "Term": "RISC",
+    "Definition": "Reduced Instruction Set Computer: “A design that produces a simple, cheap integrated circuit with a basic range of machine instructions. Relies on speed as complex instructions take many machine cycles.”"
+  },
+  {
+    "No.": "24.",
+    "Spec": "1.1.2b",
+    "Section": "Types of processor",
+    "Term": "GPU",
+    "Definition": "Graphical Processing Unit: “A specialised electronic circuit designed to rapidly manipulate and alter memory to accelerate the creation of images in a frame buffer intended for output to a display. Modern GPUs highly parallel structure makes them more effective than general-purpose CPUs for algorithms where processing of large blocks of data is done in parallel.”"
+  },
+  {
+    "No.": "25.",
+    "Spec": "1.1.2c",
+    "Section": "Types of processor",
+    "Term": "Multicore System",
+    "Definition": "“Development of CISC architecture with several sets of CPU components in one microprocessor.”"
+  },
+  {
+    "No.": "26.",
+    "Spec": "1.1.2c",
+    "Section": "Types of processor",
+    "Term": "Parallel Processor System",
+    "Definition": "“The simultaneous use of several processors to perform a single job. A job may be split into a number of tasks each of which may be processed by any available processor.”"
+  },
+  {
+    "No.": "27.",
+    "Spec": "1.1.3a",
+    "Section": "Input, output and storage",
+    "Term": "Input Device",
+    "Definition": "“Any peripheral device that can accept data, presented in the appropriate machine-readable form, decode it and transmit it as electrical pulses to the CPU”"
+  },
+  {
+    "No.": "28.",
+    "Spec": "1.1.3a",
+    "Section": "Input, output and storage",
+    "Term": "Output Device",
+    "Definition": "“Any peripheral device that translates signals from the computer into a human-readable form or into a form suitable for reprocessing by the computer at a later stage.”"
+  },
+  {
+    "No.": "29.",
+    "Spec": "1.1.3a",
+    "Section": "Input, output and storage",
+    "Term": "Storage Device",
+    "Definition": "“Any medium (optical, magnetic, solid state and even paper which holds data or programs”"
+  },
+  {
+    "No.": "30.",
+    "Spec": "1.1.3b",
+    "Section": "Input, output and storage",
+    "Term": "Magnetic Storage",
+    "Definition": "“Storage medium which uses surfaces coated with a layer of magnetic material on which data can be stored by magnetically setting the arrangement of the magnetic material.  This is done by electromagnetic read/write heads.”"
+  },
+  {
+    "No.": "31.",
+    "Spec": "1.1.3b",
+    "Section": "Input, output and storage",
+    "Term": "Flash Storage",
+    "Definition": "“Collection of memory chips that is controlled by its own software to make the collection of chips act like a disk drive.”"
+  },
+  {
+    "No.": "32.",
+    "Spec": "1.1.3b",
+    "Section": "Input, output and storage",
+    "Term": "Optical Storage",
+    "Definition": "“Storage medium that uses plastic discs on which the data is stored as patterns on the surface in pits and lans.”"
+  },
+  {
+    "No.": "33.",
+    "Spec": "1.1.3c",
+    "Section": "Input, output and storage",
+    "Term": "RAM",
+    "Definition": "Random Access Memory: “Volatile main memory.  Access times are very fast.  Often referred to as Main Memory, although RAM can be used in main areas of computing and computing storage.  When used as main memory RAM typically can be thought of as containing the Operating System, programs in use and the data those programs are using while the computer is running.”"
+  },
+  {
+    "No.": "34.",
+    "Spec": "1.1.3c",
+    "Section": "Input, output and storage",
+    "Term": "ROM",
+    "Definition": "Read Only Memory: “Memory for which the contents may be read by cannot be written to by the computer system.  Software in ROM is fixed during manufacturing.  It typically holds system boot up instructions.  ROM is non-volatile.  More modern types of ROM can be written to in limited ways, these include, PROM, EPROM and EAROM.”"
+  },
+  {
+    "No.": "35.",
+    "Spec": "1.1.3d",
+    "Section": "Input, output and storage",
+    "Term": "Virtual Storage",
+    "Definition": "“Data stored on remote hard disks accessed over the internet.”"
+  },
+  {
+    "No.": "36.",
+    "Spec": "1.2.1a",
+    "Section": "Operating systems",
+    "Term": "Operating System",
+    "Definition": "“Collection of systems software that manages the computer.  Usually supplied with the computer.  Most common operating systems are Windows, Linux, Unix, MacOS, iOS.”"
+  },
+  {
+    "No.": "37.",
+    "Spec": "1.2.1b",
+    "Section": "Operating systems",
+    "Term": "Memory Management",
+    "Definition": "“The process of organising the flexible use of the computer’s main memory.”"
+  },
+  {
+    "No.": "38.",
+    "Spec": "1.2.1b",
+    "Section": "Operating systems",
+    "Term": "Paging",
+    "Definition": "“The organisation of memory into fixed-sized units, called pages.  The immediate-access store is organised as a number of physical pages.  The logical pages used by the SPU can be assigned by the memory management unit to any page in physical memory.”"
+  },
+  {
+    "No.": "39.",
+    "Spec": "1.2.1b",
+    "Section": "Operating systems",
+    "Term": "Segmentation",
+    "Definition": "“The splitting of a large program unto a number of smaller programs or segments.  Each segment is a complete program that is executed separately.  The function of the large program is achieved by running segments consecutively.  Segmentation allows a large program to be executed on a computer with insufficient memory to store the whole program by carving up memory logically rather than physically.”"
+  },
+  {
+    "No.": "40.",
+    "Spec": "1.2.1b",
+    "Section": "Operating systems",
+    "Term": "Virtual Memory",
+    "Definition": "“Used when sufficient immediate-access store is not available.  Part of a disk drive is allocated to be used as if it were main memory.  This is very slow, and the software will attempt to use the immediate-access store if possible.”"
+  },
+  {
+    "No.": "41.",
+    "Spec": "1.2.1c",
+    "Section": "Operating systems",
+    "Term": "Interrupt",
+    "Definition": "“A signal generated by a source such as an input or output device or a systems software routine that causes a break in the execution of the current routine.  Control passes to another routine in such a way that the original routine can be resumed after the interrupt.”"
+  },
+  {
+    "No.": "42.",
+    "Spec": "1.2.1c",
+    "Section": "Operating systems",
+    "Term": "ISR",
+    "Definition": "Interrupt Service Routine: “A software routine that hardware invokes in response to an interrupt.  ISRs examine an interrupt and determine how to handle it.”"
+  },
+  {
+    "No.": "43.",
+    "Spec": "1.2.1d",
+    "Section": "Operating systems",
+    "Term": "Scheduling",
+    "Definition": "“The method by which central processor time is allocated in a multi-access system.”"
+  },
+  {
+    "No.": "44.",
+    "Spec": "1.2.1d",
+    "Section": "Operating systems",
+    "Term": "RR",
+    "Definition": "Round Robin: “A scheduling algorithm that deals with each user or task to be processed in turn.”"
+  },
+  {
+    "No.": "45.",
+    "Spec": "1.2.1d",
+    "Section": "Operating systems",
+    "Term": "FCFS",
+    "Definition": "First Come First Serve: “A scheduling algorithm that deals with each user or task in the order in which they arrive, this can be thought of as a queue.”"
+  },
+  {
+    "No.": "46.",
+    "Spec": "1.2.1d",
+    "Section": "Operating systems",
+    "Term": "MLFQ",
+    "Definition": "Multi-Level Feedback Queue: “A complex scheduling algorithm that deals with tasks based on a set of priorities and rules across different league tables, jobs in a certain table get promoted up or down their table based on these rules and can then end up in totally different tables if they relegated.”"
+  },
+  {
+    "No.": "47.",
+    "Spec": "1.2.1d",
+    "Section": "Operating systems",
+    "Term": "SJF",
+    "Definition": "Shortest Job First: “A scheduling algorithm that deals with each user or task based on the getting the smaller ones out of the way.”"
+  },
+  {
+    "No.": "48.",
+    "Spec": "1.2.1d",
+    "Section": "Operating systems",
+    "Term": "SRT",
+    "Definition": "Shortest Remaining Time: “A scheduling algorithm that deals with each user or task based on a calculating an estimated time remaking to complete.”"
+  },
+  {
+    "No.": "49.",
+    "Spec": "1.2.1e",
+    "Section": "Operating systems",
+    "Term": "Distributed OS",
+    "Definition": "“An operating system where the software is spread over a collection of independent, networked, communicating, and physically separate nodes.”"
+  },
+  {
+    "No.": "50.",
+    "Spec": "1.2.1e",
+    "Section": "Operating systems",
+    "Term": "Embedded OS",
+    "Definition": "“A highly specialised, often quite limited and cut down operating system design to fit inside a certain type of machine.  For example computers in cards, tragic lights, cash machines, POS, elevators, drinks machines etc.  In contrast to an operating system for a general-purpose computer, an embedded OS is typically quite limited, often running a single application.  However, that single application is crucial to the device’s operation.”"
+  },
+  {
+    "No.": "51.",
+    "Spec": "1.2.1e",
+    "Section": "Operating systems",
+    "Term": "Multi-tasking OS",
+    "Definition": "“Any type of system that is capable of running or appearing to run more than one program at a time.”"
+  },
+  {
+    "No.": "52.",
+    "Spec": "1.2.1e",
+    "Section": "Operating systems",
+    "Term": "Multi-user OS",
+    "Definition": "“Any operating system designed to allow multiple users to log in and connect to it from different locations / machines at the same time.  Specially designed for the sharing of resources such as files, programs or hardware (printers, scanners etc).”"
+  },
+  {
+    "No.": "53.",
+    "Spec": "1.2.1e",
+    "Section": "Operating systems",
+    "Term": "Real Time OS",
+    "Definition": "“An operating system intended to serve real-time application process data as it comes in, typically without buffering delays.”"
+  },
+  {
+    "No.": "54.",
+    "Spec": "1.2.1f",
+    "Section": "Operating systems",
+    "Term": "BIOS",
+    "Definition": "Basic Input / Output System: “Part of the operating system that handles the input and output of the computer.  It enables the operating system to use the particular features of the hardware being used.”"
+  },
+  {
+    "No.": "55.",
+    "Spec": "1.2.1g",
+    "Section": "Operating systems",
+    "Term": "Device Drivers",
+    "Definition": "“A computer program that operates or controls a particular type of device that is attached to a computer.”"
+  },
+  {
+    "No.": "56.",
+    "Spec": "1.2.1h",
+    "Section": "Operating systems",
+    "Term": "Virtual Machine",
+    "Definition": "“An emulator of a particular computer system.  Virtual machines operated based on the computer architecture and functions of a real or hypothetical computer, and their implementations may involve specialised hardware, software, or a combination of both.”"
+  },
+  {
+    "No.": "57.",
+    "Spec": "1.2.1h",
+    "Section": "Operating systems",
+    "Term": "Intermediate Code",
+    "Definition": "“Half-way type of code which is standard across machine types.  Runs on a virtual machine.”"
+  },
+  {
+    "No.": "58.",
+    "Spec": "1.2.2a",
+    "Section": "Application generation",
+    "Term": "Application",
+    "Definition": "“Any program, routine or procedures (together with their associated documentation) that can be run on a computer system.”"
+  },
+  {
+    "No.": "59.",
+    "Spec": "1.2.2b",
+    "Section": "Application generation",
+    "Term": "Utilities",
+    "Definition": "“A systems program that performs some specific task in the operation of the computer, for example file backup, virus checking or a compression program.”"
+  },
+  {
+    "No.": "60.",
+    "Spec": "1.2.2c",
+    "Section": "Application generation",
+    "Term": "Open Source",
+    "Definition": "“Software for which the original source code is made freely available and may be redistributed and modified. – Open source file types are often able to be opened on many different types of applications.”"
+  },
+  {
+    "No.": "61.",
+    "Spec": "1.2.2c",
+    "Section": "Application generation",
+    "Term": "Closed Source",
+    "Definition": "“Often called Proprietary is a type of computer program for which the software code is not shared with the public for anyone to look at or make changes to – Closed / Proprietary file types are often only able to be opened if you own a version of the software they were originally made in.”"
+  },
+  {
+    "No.": "62.",
+    "Spec": "1.2.2d",
+    "Section": "Application generation",
+    "Term": "Source Code",
+    "Definition": "“Original code typed in by the programmer in the native language.  This is the code as it appears before it is compiled or interrupted.”"
+  },
+  {
+    "No.": "63.",
+    "Spec": "1.2.2d",
+    "Section": "Application generation",
+    "Term": "Translator",
+    "Definition": "“A program that translates a program written in assembly language into machine code.”"
+  },
+  {
+    "No.": "64.",
+    "Spec": "1.2.2d",
+    "Section": "Application generation",
+    "Term": "Interpreter",
+    "Definition": "“Translates and executes a program one statement at a time.”"
+  },
+  {
+    "No.": "65.",
+    "Spec": "1.2.2d",
+    "Section": "Application generation",
+    "Term": "Compiler",
+    "Definition": "“A program that translates a high-level language program, source code, into a computer’s machine code.”"
+  },
+  {
+    "No.": "66.",
+    "Spec": "1.2.2d",
+    "Section": "Application generation",
+    "Term": "Assembler",
+    "Definition": "“A program that translates (assembles) a program written in assembly language into machine code.”"
+  },
+  {
+    "No.": "67.",
+    "Spec": "1.2.2e",
+    "Section": "Application generation",
+    "Term": "Compilation",
+    "Definition": "“The translation process that produces an equivalent program in a low-level language.  Compilation involves analysing the language structure of the source program, determining if it is valid, and proceeding suitable machine code.”"
+  },
+  {
+    "No.": "68.",
+    "Spec": "1.2.2e",
+    "Section": "Application generation",
+    "Term": "Lexical Analysis",
+    "Definition": "“The stage in compilation of a program that puts each statement into the form best suited to the syntax analyser.  The standard components of each statement, such as PRINT, IF etc., are replaced by their tokens (a unique fixed length code) and programmer-defined names are entered into a symbol table.  The lexical analyser also remove unnecessary charters such as spaces, tabs and coder comments.”"
+  },
+  {
+    "No.": "69.",
+    "Spec": "1.2.2e",
+    "Section": "Application generation",
+    "Term": "Syntax Analysis",
+    "Definition": "“The stage in compilation where language statements are checked against the rules of the language, errors being reported if a statement is not valid.”"
+  },
+  {
+    "No.": "70.",
+    "Spec": "1.2.2e",
+    "Section": "Application generation",
+    "Term": "Code Generation",
+    "Definition": "“The stage in compilation that produces a machine-code program that is equivalent to the source program.”"
+  },
+  {
+    "No.": "71.",
+    "Spec": "1.2.2e",
+    "Section": "Application generation",
+    "Term": "Optimisation",
+    "Definition": "“The stage of compilation that ensures that the executable program if optimised at least as much as the compiler can predict. e.g. removing reference to unused variables or routines.”"
+  },
+  {
+    "No.": "72.",
+    "Spec": "1.2.2f",
+    "Section": "Application generation",
+    "Term": "Linker",
+    "Definition": "“Software tool that allows already compiled object code files or modules to be combined with the compiled program.”"
+  },
+  {
+    "No.": "73.",
+    "Spec": "1.2.2f",
+    "Section": "Application generation",
+    "Term": "Loader",
+    "Definition": "“A program that copies an object program held on backing store into main store ready for execution.”"
+  },
+  {
+    "No.": "74.",
+    "Spec": "1.2.2f",
+    "Section": "Application generation",
+    "Term": "Libraries",
+    "Definition": "“A collection of pre-compiled routines which can be incorporated into a program.”"
+  },
+  {
+    "No.": "75.",
+    "Spec": "1.2.3a",
+    "Section": "Software development",
+    "Term": "SDLC",
+    "Definition": "Systems Development Life Cycle: “The various stages in designing and implementing a new computer system.  These stages – typically analysis, design, implementation, testing and installation – are part of the systems life cycle performed by the main design team. Not be too confused with the Software Development Cycle which is part of the implementation stage of the systems life cycle.”"
+  },
+  {
+    "No.": "76.",
+    "Spec": "1.2.3a",
+    "Section": "Software development",
+    "Term": "Waterfall Model",
+    "Definition": "“An earlier abstract description of the system lifecycle where each identified stage of development flows from the previous one and down to the next one.  Feedback from each to the previous takes place independently of the forward flow.”"
+  },
+  {
+    "No.": "77.",
+    "Spec": "1.2.3a",
+    "Section": "Software development",
+    "Term": "Agile Methodologies",
+    "Definition": "“Describes the responsive development of a system made of small software modules (often web-based applications) by a group of collaborators who work concurrently and closely under a leader who ensures engineering best practice and delivery of the customer requirements.”"
+  },
+  {
+    "No.": "78.",
+    "Spec": "1.2.3a",
+    "Section": "Software development",
+    "Term": "Extreme Programming",
+    "Definition": "“A software development methodology which is intended to improve software quality and responsiveness to changing customer requirements.  It is a form of agile development, and as such advocated frequent releases in short development cycles, which is intended to improve productivity and introduce checkpoints at which new customer requirements can be adopted.  Other common elements of XP include: programming in pairs or doing extensive code review, flat management structures and avoiding programming of features until they are actually needed.”"
+  },
+  {
+    "No.": "79.",
+    "Spec": "1.2.3a",
+    "Section": "Software development",
+    "Term": "Spiral Model",
+    "Definition": "“An abstract description of the systems life cycle where there are four defined quadrants – planning, risk analysis, use of design methods, client and management evaluation.  Once one stage of development has gone full circle, the next please takes place, and so on until completion.”"
+  },
+  {
+    "No.": "80.",
+    "Spec": "1.2.3a",
+    "Section": "Software development",
+    "Term": "RAD",
+    "Definition": "Rapid Application Development: “A design strategy that includes online development and repeated prototyping and repeated prototyping and evaluation.  It is particularly suited to interactive systems.”"
+  },
+  {
+    "No.": "81.",
+    "Spec": "1.2.4a",
+    "Section": "Types of programming language",
+    "Term": "Programming Paradigm",
+    "Definition": "“The word ‘paradigm’ means to describe an example or pattern.  In a Computing context, this means to describe a computational way of doing things.  So a Programming Paradigm is a style or way of programming. E.g. Low-Level languages, High-Level languages, Declarative languages are all examples of different programming paradigms.”"
+  },
+  {
+    "No.": "82.",
+    "Spec": "1.2.4b",
+    "Section": "Types of programming language",
+    "Term": "Procedural Language",
+    "Definition": "“Any high level language in which program statements can be grouped in self-contained blocks called procedures and functions.  These procedures have their own variables, not accessible outside the procedure.”"
+  },
+  {
+    "No.": "83.",
+    "Spec": "1.2.4c",
+    "Section": "Types of programming language",
+    "Term": "Assembly Language",
+    "Definition": "“A language which is related very closely to the computer’s own machine code. ”"
+  },
+  {
+    "No.": "84.",
+    "Spec": "1.2.4c",
+    "Section": "Types of programming language",
+    "Term": "Machine Code",
+    "Definition": "“Set of all possible instructions made available by the hardware design of a particular processor.  Closest to pure binary.”"
+  },
+  {
+    "No.": "85.",
+    "Spec": "1.2.4c",
+    "Section": "Types of programming language",
+    "Term": "Low Level Language",
+    "Definition": "“A language which is close to machine code.  Related closely to the design of the machine. A one-to-one language”"
+  },
+  {
+    "No.": "86.",
+    "Spec": "1.2.4c",
+    "Section": "Types of programming language",
+    "Term": "High Level Language",
+    "Definition": "“A language designed to help a programmer express a computer program in a way that reflects the problem that is being solved, rather than the details of how the computer will produce the solution. One-to-many language.”"
+  },
+  {
+    "No.": "87.",
+    "Spec": "1.2.4c",
+    "Section": "Types of programming language",
+    "Term": "LMC",
+    "Definition": "Little Man Computer: “An instructional model of a computer, created by Dr. Stuart Madnick in 1965. The LMC is generally used to teach students, because it models a simple von Neumann architecture computer - which has all of the basic features of a modern computer. It can be programmed in machine code or assembly code”"
+  },
+  {
+    "No.": "88.",
+    "Spec": "1.2.4d",
+    "Section": "Types of programming language",
+    "Term": "Immediate Addressing",
+    "Definition": "“Uses the data in the address field, not as an address, but as a constant that is needed by the program.  An example is a routine counting up to 10, which may have the constant ‘10’ supplied in the address field of an instruction.  Although the address field cannot hold numbers as large as those that can be stored as data in a memory location, because space has to be left for the operation code field, this is a particularly convenient method of loading constants into the accumulator.”"
+  },
+  {
+    "No.": "89.",
+    "Spec": "1.2.4d",
+    "Section": "Types of programming language",
+    "Term": "Direct Addressing",
+    "Definition": "“Uses the data in the address field without alteration.  This is the simplest method of addressing and also the most common.”"
+  },
+  {
+    "No.": "90.",
+    "Spec": "1.2.4d",
+    "Section": "Types of programming language",
+    "Term": "Indirect Addressing",
+    "Definition": "“Uses the address field to hold the address of a location that contains the required address."
+  },
+  {
+    "No.": "91.",
+    "Spec": "1.2.4d",
+    "Section": "Types of programming language",
+    "Term": "Indexed Addressing",
+    "Definition": "“Modifies the address (either a direct or an indirect address) in the address field by the addition of a number held in a special-purpose registers, called an index register, before the address is used.  Index registers are quickly and easily altered providing an efficient way of accessing a range of memory locations, such as in an array.”"
+  },
+  {
+    "No.": "92.",
+    "Spec": "1.2.4e",
+    "Section": "Types of programming language",
+    "Term": "OO",
+    "Definition": "Object Orientation: “Looking at systems by classifying them into real world objects”"
+  },
+  {
+    "No.": "93.",
+    "Spec": "1.2.4e",
+    "Section": "Types of programming language",
+    "Term": "OOP",
+    "Definition": "Object Oriented Programming: “A method of programming which classifies real world objects into classes and encapsulates those objects attributes and behaviours.”"
+  },
+  {
+    "No.": "94.",
+    "Spec": "1.2.4e",
+    "Section": "Types of programming language",
+    "Term": "Class",
+    "Definition": "“A type definition of an object”"
+  },
+  {
+    "No.": "95.",
+    "Spec": "1.2.4e",
+    "Section": "Types of programming language",
+    "Term": "Object",
+    "Definition": "“An instance of a class.”"
+  },
+  {
+    "No.": "96.",
+    "Spec": "1.2.4e",
+    "Section": "Types of programming language",
+    "Term": "Base Class",
+    "Definition": "“Base class contains attributes and methods. It is the highest class and does not inherit from any other class.”"
+  },
+  {
+    "No.": "97.",
+    "Spec": "1.2.4e",
+    "Section": "Types of programming language",
+    "Term": "Superclass",
+    "Definition": "“A class that has been extended by another class.  It allows the extending class to inherit its attributes and methods.”"
+  },
+  {
+    "No.": "98.",
+    "Spec": "1.2.4e",
+    "Section": "Types of programming language",
+    "Term": "Subclass",
+    "Definition": "“A class that extends another class.  The subclass inherits the methods and attributes of the class it extends.”"
+  },
+  {
+    "No.": "99.",
+    "Spec": "1.2.4e",
+    "Section": "Types of programming language",
+    "Term": "Derived Class",
+    "Definition": "“A derived class is any class that inherits attributes and methods from any other derived class or base class.”"
+  },
+  {
+    "No.": "100.",
+    "Spec": "1.2.4e",
+    "Section": "Types of programming language",
+    "Term": "Instantiation",
+    "Definition": "“The process of creating an actual named instance of class.  The instantiated named copy of the class in an object of that class.”"
+  },
+  {
+    "No.": "101.",
+    "Spec": "1.2.4e",
+    "Section": "Types of programming language",
+    "Term": "Overriding",
+    "Definition": "“A method in a subclass or derived class which has the same name as a method in one or more of its superclass's.  The method supersedes all other versions of the method above it in the inheritance tree.”"
+  },
+  {
+    "No.": "102.",
+    "Spec": "1.2.4e",
+    "Section": "Types of programming language",
+    "Term": "Method",
+    "Definition": "“A program routine contained within an object designed to perform a particular task on the data within the object.  A method can broadly be thought of as a procedure / function from more traditional procedural programming languages.”"
+  },
+  {
+    "No.": "103.",
+    "Spec": "1.2.4e",
+    "Section": "Types of programming language",
+    "Term": "Attribute",
+    "Definition": "“A single bit of data within a record”"
+  },
+  {
+    "No.": "104.",
+    "Spec": "1.2.4e",
+    "Section": "Types of programming language",
+    "Term": "Inheritance",
+    "Definition": "“When a derived class is defined it also has all the attributes and methods of the base class.”"
+  },
+  {
+    "No.": "105.",
+    "Spec": "1.2.4e",
+    "Section": "Types of programming language",
+    "Term": "Encapsulation",
+    "Definition": "“All of the object's attributes are contained and hidden in the object and access to them is restricted to operations of that class.”"
+  },
+  {
+    "No.": "106.",
+    "Spec": "1.2.4e",
+    "Section": "Types of programming language",
+    "Term": "Polymorphism",
+    "Definition": "“A specialised form of overloading which allows us to create very general object structures, which can be used with a wide range of data types.”"
+  },
+  {
+    "No.": "107.",
+    "Spec": "1.3.1a",
+    "Section": "Compression, encryption and hashing",
+    "Term": "Lossy Compression",
+    "Definition": "“A compression scheme where their generally involves a loss of resolution in parts of the image where experiences shows that it will be least noticed.”"
+  },
+  {
+    "No.": "108.",
+    "Spec": "1.3.1a",
+    "Section": "Compression, encryption and hashing",
+    "Term": "Lossless Compression",
+    "Definition": "“A compression scheme that allows the original images to be recreated.”"
+  },
+  {
+    "No.": "109.",
+    "Spec": "1.3.1b",
+    "Section": "Compression, encryption and hashing",
+    "Term": "Length Encoding",
+    "Definition": "“A very simple form of data compression in which runs of data (that is, sequences in which the same data value occurs in many consecutive data elements) are stored as a single data value and count, rather than as the original run.”"
+  },
+  {
+    "No.": "110.",
+    "Spec": "1.3.1b",
+    "Section": "Compression, encryption and hashing",
+    "Term": "Dictionary Coding",
+    "Definition": "“A class of lossless data compression algorithms which operate by searching for matches between the text to be compressed and a set of strings contained in a data structure (called the ‘dictionary’) maintained by the encoder.”"
+  },
+  {
+    "No.": "111.",
+    "Spec": "1.3.1c",
+    "Section": "Compression, encryption and hashing",
+    "Term": "Symmetric Encryption",
+    "Definition": "“The oldest and best-known encryption technique.  A secret key, which can be a number, a word, or just a string of random letters, is applied to the text of a message to change the content in a particular way.  This might be as simple as shifting each letter by a number of places in the alphabet.”"
+  },
+  {
+    "No.": "112.",
+    "Spec": "1.3.1c",
+    "Section": "Compression, encryption and hashing",
+    "Term": "Asymmetric Encryption",
+    "Definition": "“This method of encryption involves using a pair of keys to encrypt and decrypt a message so that it arrives securely.  Initially, a network user receives a public and private key pair from a certificate authority.”"
+  },
+  {
+    "No.": "113.",
+    "Spec": "1.3.1d",
+    "Section": "Compression, encryption and hashing",
+    "Term": "Hashing",
+    "Definition": "“The process of calculating a numeric value from one or more data items.  While this value obviously depends on the value of the data items, it need not depend on the meaning attached to themn, simply producing a number that is used within the computer.”"
+  },
+  {
+    "No.": "114.",
+    "Spec": "1.3.1a",
+    "Section": "Databases",
+    "Term": "Relational Database",
+    "Definition": "“Allows the user to specify information about multiple tables and the relationship between those tables”"
+  },
+  {
+    "No.": "115.",
+    "Spec": "1.3.1a",
+    "Section": "Databases",
+    "Term": "Flat File",
+    "Definition": "“A database that allows the user to specify data attributes (columns, databases etc.) for only one table at a time, storing those attributes independently”"
+  },
+  {
+    "No.": "116.",
+    "Spec": "1.3.1a",
+    "Section": "Databases",
+    "Term": "Primary Key",
+    "Definition": "“A field that uniquely identifies a record in a table”"
+  },
+  {
+    "No.": "117.",
+    "Spec": "1.3.1a",
+    "Section": "Databases",
+    "Term": "Foreign Key",
+    "Definition": "“The linking field in the foreign table formed when a relationship is made.  The FK becomes by default the PK of the new table.”"
+  },
+  {
+    "No.": "118.",
+    "Spec": "1.3.1a",
+    "Section": "Databases",
+    "Term": "Concatenated Primary Key",
+    "Definition": "“When more than one field is added together to form a unique primary key for a table.”"
+  },
+  {
+    "No.": "119.",
+    "Spec": "1.3.1a",
+    "Section": "Databases",
+    "Term": "Secondary Key",
+    "Definition": "“A key field which can be used to access a table in a different way”"
+  },
+  {
+    "No.": "120.",
+    "Spec": "1.3.1a",
+    "Section": "Databases",
+    "Term": "ERM",
+    "Definition": "Entity Relationship Modelling: “The process of producing a data model for describing the data or information aspects of a business domain or its process requirements, in an abstract way that lends itself to ultimately being implemented in a data such as a relation database.”"
+  },
+  {
+    "No.": "121.",
+    "Spec": "1.3.1a",
+    "Section": "Databases",
+    "Term": "Normalisation",
+    "Definition": "“The process of arranging data in tables and setting their relationships to move them through normal forms”"
+  },
+  {
+    "No.": "122.",
+    "Spec": "1.3.1a",
+    "Section": "Databases",
+    "Term": "Indexing",
+    "Definition": "“The process of creating a database index, which is a data structure that improves the speed of data retrieval operations on a dataset table at the cost of additional writes and storage space to maintain the index data structure.”"
+  },
+  {
+    "No.": "123.",
+    "Spec": "1.3.1c",
+    "Section": "Databases",
+    "Term": "0NF",
+    "Definition": "“A table with no normalisation.  All data and all fields in one table”"
+  },
+  {
+    "No.": "124.",
+    "Spec": "1.3.1c",
+    "Section": "Databases",
+    "Term": "1NF",
+    "Definition": "First Normal Form: “A relationship with repeating groups removed.  That is a relation in which the intersection of each tuple and attribute contains one and only one value.”"
+  },
+  {
+    "No.": "125.",
+    "Spec": "1.3.1c",
+    "Section": "Databases",
+    "Term": "2NF",
+    "Definition": "Second Normal Form: “A relation that is in 1NF and every non-primary key attribute is fully dependant on the primary key.  That is, all the incomplete dependencies have been removed”"
+  },
+  {
+    "No.": "126.",
+    "Spec": "1.3.1c",
+    "Section": "Databases",
+    "Term": "3NF",
+    "Definition": "Third Normal Form: “A relation that is in 1NF and 2NF, and in which no non-primary key attribute is transitively dependant on the primary key.  That is, all non-key elements are fully dependant on the primary key”"
+  },
+  {
+    "No.": "127.",
+    "Spec": "1.3.1c",
+    "Section": "Databases",
+    "Term": "Normal Forms",
+    "Definition": "“A way of structuring the data in a relational database according to formal rules, in order to avoid problems of efficiency and security in accessing and maintain the data.”"
+  },
+  {
+    "No.": "128.",
+    "Spec": "1.3.1d",
+    "Section": "Databases",
+    "Term": "SQL",
+    "Definition": "Structured Query Language: “The language and syntax used to write and run database queries”"
+  },
+  {
+    "No.": "129.",
+    "Spec": "1.3.1e",
+    "Section": "Databases",
+    "Term": "Referential Integrity",
+    "Definition": "“A measure of the consistency of the data in a database.  It is violated when the relation to which a foreign key refers to no longer exists.”"
+  },
+  {
+    "No.": "130.",
+    "Spec": "1.3.1f",
+    "Section": "Databases",
+    "Term": "Transaction Processing",
+    "Definition": "“Information processing that is divided into individual, indivisible operations, called transactions.  Each transaction must succeed or fail as a complete unit, it can never be only partially complete.”"
+  },
+  {
+    "No.": "131.",
+    "Spec": "1.3.1f",
+    "Section": "Databases",
+    "Term": "ACID",
+    "Definition": "Atomicity, Consistency, Isolation, Durability: “A set of properties that guarantee that database transactions are processed reliably.  In the context of databases, a single logical operation on the data is called a transaction.”"
+  },
+  {
+    "No.": "132.",
+    "Spec": "1.3.1f",
+    "Section": "Databases",
+    "Term": "Record Locking",
+    "Definition": "“A technique of preventing simultaneous access to data in a database, to prevent inconsistent results.  The classic example is demonstrated by two bank clerks attempting to update the same bank account for two different transactions.”"
+  },
+  {
+    "No.": "133.",
+    "Spec": "1.3.1f",
+    "Section": "Databases",
+    "Term": "Redundancy",
+    "Definition": "“Redundancy occurs in database systems which have a field that is repeated in two or more tables  For instance, when customer data is duplicated and attached with each product bought, then redundancy of data is a known source of inconsistency since customer might appear with different values for given attributes.”"
+  },
+  {
+    "No.": "134.",
+    "Spec": "1.3.2a",
+    "Section": "Networks",
+    "Term": "Protocol",
+    "Definition": "“A set of rules that allow two devices to communicate.”"
+  },
+  {
+    "No.": "135.",
+    "Spec": "1.3.2b",
+    "Section": "Networks",
+    "Term": "TCP/IP Stack",
+    "Definition": "Transmission Control Protocol / Internet Protocol: “The most common general-purpose standard protocol that allows any networked computers (including those on The Internet) to communicate with each other whatever their equipment.”"
+  },
+  {
+    "No.": "136.",
+    "Spec": "1.3.2b",
+    "Section": "Networks",
+    "Term": "DNS",
+    "Definition": "Domain Name System: “The Internet’s equivalent of a phone book.  They maintain a directory of domain names and translate them to Internet Protocol (IP) addresses.  This is necessary because, although domain names are easy for people to remember, computers or machines access websites based on IP addresses.”"
+  },
+  {
+    "No.": "137.",
+    "Spec": "1.3.2b",
+    "Section": "Networks",
+    "Term": "Protocol Layering",
+    "Definition": "“The concept of a protocol not simply being a set of rules but those rules being built up into very specific layers and those rule layers behind built on top of each other in a deliberate order creating a layered protocol stack.  This results in the rules of a protocol being executed in a specific sequence as you move through the protocol stack.”"
+  },
+  {
+    "No.": "138.",
+    "Spec": "1.3.2b",
+    "Section": "Networks",
+    "Term": "LAN",
+    "Definition": "Local Area Network: “A collection of computers / computing devices on the same network which are physically close together, for example, all located within one  building or site e.g. a home or school network.”"
+  },
+  {
+    "No.": "139.",
+    "Spec": "1.3.2b",
+    "Section": "Networks",
+    "Term": "WAN",
+    "Definition": "Wide Area Network: “A collection of computers / computing devices on the same network which are spread out over a geographically large area, for example a university across several campuses, or a multinational corporation with offices / sites in different cities or even different countries.”"
+  },
+  {
+    "No.": "140.",
+    "Spec": "1.3.2b",
+    "Section": "Networks",
+    "Term": "Packet Switching",
+    "Definition": "“A method of sending data over a wide area network in which the message is broken into a number of parts which are sent independently, over whatever route is optimum for each packet, and reassembled at the destination.”"
+  },
+  {
+    "No.": "141.",
+    "Spec": "1.3.2b",
+    "Section": "Networks",
+    "Term": "Circuit Switching",
+    "Definition": "“A method of sending data over a wide area network in which two network nodes establish a dedicated communications channel through the network before the nodes may communicate.  All data then follows this same path for the duration of the data transfer.”"
+  },
+  {
+    "No.": "142.",
+    "Spec": "1.3.2c",
+    "Section": "Networks",
+    "Term": "Firewall",
+    "Definition": "“A computer application used in a network to prevent external users gaining unauthorised access to a computer system.”"
+  },
+  {
+    "No.": "143.",
+    "Spec": "1.3.2c",
+    "Section": "Networks",
+    "Term": "Proxies",
+    "Definition": "“A computer application that accesses data on a different computer system or network.  It controls the access of authorised users to data and allows the operation of the system to be isolated from control by external users.”"
+  },
+  {
+    "No.": "144.",
+    "Spec": "1.3.2c",
+    "Section": "Networks",
+    "Term": "Encryption",
+    "Definition": "“The process of making data in a computer system unintelligible.”"
+  },
+  {
+    "No.": "145.",
+    "Spec": "1.3.2e",
+    "Section": "Networks",
+    "Term": "Client-Server",
+    "Definition": "“A method of network organisation in which network stations make use of resources available at one or more servers.”"
+  },
+  {
+    "No.": "146.",
+    "Spec": "1.3.2e",
+    "Section": "Networks",
+    "Term": "Peer to Peer",
+    "Definition": "“A method of network organisation in which network stations can share resources on other network stations, so one station can use a printer on another station or save data on another station’s local storage.”"
+  },
+  {
+    "No.": "147.",
+    "Spec": "1.3.4a",
+    "Section": "Web technologies",
+    "Term": "HTML",
+    "Definition": "HyperText Markup Language: “A mark-up language developed for multimedia documents, such as World Wide Web Pages.”"
+  },
+  {
+    "No.": "148.",
+    "Spec": "1.3.4a",
+    "Section": "Web technologies",
+    "Term": "CSS",
+    "Definition": "Cascading Style Sheets: “A definition of the formatting and layout of elements of an HTML document.  The stylesheet may be part of the HTML document, or stored as a separate file linked to the document.  The use of different stylesheets linked to the same document allows appropriate layout of the same content on, for example, mobile devices, display screens.”"
+  },
+  {
+    "No.": "149.",
+    "Spec": "1.3.4a",
+    "Section": "Web technologies",
+    "Term": "JavaScript",
+    "Definition": "“An object-oriented computer programming language commonly used to create interactive effects within web browsers.”"
+  },
+  {
+    "No.": "150.",
+    "Spec": "1.3.4b",
+    "Section": "Web technologies",
+    "Term": "Search Engine Indexing",
+    "Definition": "“The method of collecting, parsing and storing data to facilitate fast and accurate information retrieval.”"
+  },
+  {
+    "No.": "151.",
+    "Spec": "1.3.4c",
+    "Section": "Web technologies",
+    "Term": "PageRank Algorithm",
+    "Definition": "“An algorithm used by Google Search to rank websites in their search engine results.  It works by counting the number and quality of links to a page to determine a rough estimate of how important the website is.  The underlying assumption is that more important websites are likely to receive more links from other websites.”"
+  },
+  {
+    "No.": "152.",
+    "Spec": "1.3.4d",
+    "Section": "Web technologies",
+    "Term": "Sever Side Processing",
+    "Definition": "“Server-side processing refers to operations that are performed by the server in a client-server relationship in computer network.  Typically, a server is a computer program, such as a web server, that runs on a remote server, reachable from a user’s local computer.”"
+  },
+  {
+    "No.": "153.",
+    "Spec": "1.3.4d",
+    "Section": "Web technologies",
+    "Term": "Client Side Processing",
+    "Definition": "“Client-side processing refers to operations that are performed by the client in a client-server relationship in a computer network.  Typically, a client is a computer application, such as a web browser, that runs on a user’s local computer and connects to a server as necessary.”"
+  },
+  {
+    "No.": "154.",
+    "Spec": "1.4.1a",
+    "Section": "Data types",
+    "Term": "Primitive Data Types",
+    "Definition": "“The basic data types provided by a programming language as building blocks.  Most languages allow more complicated composite types to be recursively construction starting from basic types. E.g. char, integer, float, Boolean.  As an extension a ‘string’ data type is constructed behind the scenes of many char data types.”"
+  },
+  {
+    "No.": "155.",
+    "Spec": "1.4.1a",
+    "Section": "Data types",
+    "Term": "Integer",
+    "Definition": "“A data type used to store positive and negative whole numbers"
+  },
+  {
+    "No.": "156.",
+    "Spec": "1.4.1a",
+    "Section": "Data types",
+    "Term": "Real",
+    "Definition": "“A data type used to store an approximation of a real number in a way that can support a trade-off between range and precision.  A number is, in general, represented approximately to a fixed number of significant digits and scaled using an exponent.”"
+  },
+  {
+    "No.": "157.",
+    "Spec": "1.4.1a",
+    "Section": "Data types",
+    "Term": "Floating Point",
+    "Definition": "“A data type used to store an approximation of a real number in a way that can support a trade-off between range and precision.  A number is, in general, represented approximately to a fixed number of significant digits and scaled using an exponent.”"
+  },
+  {
+    "No.": "158.",
+    "Spec": "1.4.1a",
+    "Section": "Data types",
+    "Term": "Character",
+    "Definition": "“A single alphanumeric character or symbol.”"
+  },
+  {
+    "No.": "159.",
+    "Spec": "1.4.1a",
+    "Section": "Data types",
+    "Term": "String",
+    "Definition": "“A sequence of alphanumeric characters and or symbols. e.g. a word or sentence.”"
+  },
+  {
+    "No.": "160.",
+    "Spec": "1.4.1a",
+    "Section": "Data types",
+    "Term": "Boolean",
+    "Definition": "“Used to store the logical conditions TRUE / FALSE.  Often translated to On/Off, Yes/No etc.”"
+  },
+  {
+    "No.": "161.",
+    "Spec": "1.4.1b",
+    "Section": "Data types",
+    "Term": "Binary",
+    "Definition": "“Binary describes a numbering scheme in which there are only two possible values for each digit: 0 and 1.  The term in computing refers to any digital encoding system in which there are exactly two possible states.  E.g. in memory, storage, processing and communications, the 0 and 1 values are sometimes called “low” and “high”, respectively.”"
+  },
+  {
+    "No.": "162.",
+    "Spec": "1.4.1c",
+    "Section": "Data types",
+    "Term": "Sign and Magnitude",
+    "Definition": "“A method in computing of being able to store negative numbers as string of pure binary digits.  It works by turning the MSB into a sign bit, where 0 represents a positive number and 1 represents a negative.”"
+  },
+  {
+    "No.": "163.",
+    "Spec": "1.4.1c",
+    "Section": "Data types",
+    "Term": "Two’s Complement",
+    "Definition": "“A method in computing of being able to store and represent floating point real numbers (both positive and negative) as a string of pure binary digits.  Uses the concepts of two’s complements, mantissa and exponent.”"
+  },
+  {
+    "No.": "164.",
+    "Spec": "1.4.1e",
+    "Section": "Data types",
+    "Term": "Hexadecimal",
+    "Definition": "“A numerical system of notation which uses 16 rather than 10 as its base.  The 16 Hex base digits are 0-9 and the letters A-F.”"
+  },
+  {
+    "No.": "165.",
+    "Spec": "1.4.1f",
+    "Section": "Data types",
+    "Term": "Denary",
+    "Definition": "“A numerical system of notation which uses 10 as its base.  The 10 Decimal base digits are 0-9.”"
+  },
+  {
+    "No.": "166.",
+    "Spec": "1.4.1h",
+    "Section": "Data types",
+    "Term": "Floating Point Arithmetic",
+    "Definition": "“The mathematical process of performing simply calculations on more than one floating-point number stored in binary notation.”"
+  },
+  {
+    "No.": "167.",
+    "Spec": "1.4.1i",
+    "Section": "Data types",
+    "Term": "Bitwise Manipulation",
+    "Definition": "“The act of algorithmically manipulating bits or other pieces of data shorter than a word.  Programming tasks that require a bit manipulation include low-level device control, error detection and correction algorithms, data compression, encryption algorithms, and optimisation.”"
+  },
+  {
+    "No.": "168.",
+    "Spec": "1.4.1i",
+    "Section": "Data types",
+    "Term": "Shifts",
+    "Definition": "“An operation that moves the bits held in a register, called the shift register, either to the left or the right.  There are three different types of shift: arithmetic shift, logical shift and cyclic shift.  They are distinguished by what happens to the bits that are shifted out of the register at one end and what is moved in to fill the vacant space at the other end.”"
+  },
+  {
+    "No.": "169.",
+    "Spec": "1.4.1i",
+    "Section": "Data types",
+    "Term": "AND",
+    "Definition": "“A logical operator used within a program.  AND works by only returning TRUE if both values being compared are TRUE.”"
+  },
+  {
+    "No.": "170.",
+    "Spec": "1.4.1i",
+    "Section": "Data types",
+    "Term": "OR",
+    "Definition": "“A logical operator used within a program.  OR works by returning TRUE as long as either value being compared is TRUE.”"
+  },
+  {
+    "No.": "171.",
+    "Spec": "1.4.1i",
+    "Section": "Data types",
+    "Term": "XOR",
+    "Definition": "“A logical operator used within a program. XOR stands for exclusive OR.  It will return TRUE if the two items being compared are different.”"
+  },
+  {
+    "No.": "172.",
+    "Spec": "1.4.1j",
+    "Section": "Data types",
+    "Term": "Character Sets",
+    "Definition": "“The set of symbols that may be represented in a computer at a particular time.  These symbols, called characters, can be letters, digits, spaces or punctuations marks, the set includes control characters.”"
+  },
+  {
+    "No.": "173.",
+    "Spec": "1.4.1j",
+    "Section": "Data types",
+    "Term": "ASCII",
+    "Definition": "America Standard Code for Information Interchange: “A character set devised for early telecommunication systems but proved to be ideal for computer systems.  ASCII codes use 7-bits giving 32 control codes and 96 displayable characters (the 8th bit is often used for error checking).”"
+  },
+  {
+    "No.": "174.",
+    "Spec": "1.4.1j",
+    "Section": "Data types",
+    "Term": "UNICODE",
+    "Definition": "“Standard character set that replaces the need for all the different character sets.  It incorporates characters from almost all the world’s languages.  It is a 16-bit extension of ASCII.”"
+  },
+  {
+    "No.": "175.",
+    "Spec": "1.4.2a",
+    "Section": "Data structures",
+    "Term": "Array",
+    "Definition": "“A set of data items of the same type grouped together using a single identifier.  Each of the data items is addressed by the variable name and a subscript.”"
+  },
+  {
+    "No.": "176.",
+    "Spec": "1.4.2a",
+    "Section": "Data structures",
+    "Term": "Records",
+    "Definition": "“A data structure which consists of a collection of elements, typically in fixed number and sequence and typically indexed by names.  The elements of records may also be called fields. The record type is a data type that describes such values and variables.  Most modern computer languages allow the programmer to define new record types.  The definition includes specifying the data type of each field and an identifier by which it can be accessed.”"
+  },
+  {
+    "No.": "177.",
+    "Spec": "1.4.2a",
+    "Section": "Data structures",
+    "Term": "Lists",
+    "Definition": "“An abstract data type that represents a sequence of values, where the same value may occur more than once.  The name list is also used to cover several concrete data structures that can be used to implement abstract lists especially linked lists.”"
+  },
+  {
+    "No.": "178.",
+    "Spec": "1.4.2a",
+    "Section": "Data structures",
+    "Term": "Tuple",
+    "Definition": "“Another name for a record.”"
+  },
+  {
+    "No.": "179.",
+    "Spec": "1.4.2b",
+    "Section": "Data structures",
+    "Term": "Linkedlist",
+    "Definition": "“A list where each item contains the data together with a pointer to the next item.  There may be an additional pointer to the previous item.  This means the items can be accessed in order even if they are not stored in order; they do not have to be stored in adjacent memory locations.”"
+  },
+  {
+    "No.": "180.",
+    "Spec": "1.4.2b",
+    "Section": "Data structures",
+    "Term": "Directed Graph",
+    "Definition": "“In a directed graph, the order of the vertices in the pairs in the edge set matters.”"
+  },
+  {
+    "No.": "181.",
+    "Spec": "1.4.2b",
+    "Section": "Data structures",
+    "Term": "Undirected Graph",
+    "Definition": "“In an undirected graph, the order of the vertices in the pairs in the Edge set doesn’t matter.”"
+  },
+  {
+    "No.": "182.",
+    "Spec": "1.4.2b",
+    "Section": "Data structures",
+    "Term": "Stack",
+    "Definition": "“A stack is a dynamic data structure of the form Last In First Out (LIFO).”"
+  },
+  {
+    "No.": "183.",
+    "Spec": "1.4.2b",
+    "Section": "Data structures",
+    "Term": "Queue",
+    "Definition": "“A queue is a dynamic data structure of the form First In First Out (FIFO).”"
+  },
+  {
+    "No.": "184.",
+    "Spec": "1.4.2b",
+    "Section": "Data structures",
+    "Term": "Tree",
+    "Definition": "“A tree is a non-linear dynamic data structure where data items can be thought of as occurring at different levels.  There are links between items at one level and their descendants at the next.  Each data item has data that relates in some way to its unique parent node.  The data items are usually called nodes with the links known as branches.  The top level nodes is called the root node.”"
+  },
+  {
+    "No.": "185.",
+    "Spec": "1.4.2b",
+    "Section": "Data structures",
+    "Term": "Binary Search Tree",
+    "Definition": "“A data structure very similar to a tree with the following additional restrictions.  Each node can have only 0, 1 or 2 leaf nodes.  All left nodes and all of its descendants have smaller values that the root node, while all right nodes and all of its descendants have larger values than the root node.”"
+  },
+  {
+    "No.": "186.",
+    "Spec": "1.4.2b",
+    "Section": "Data structures",
+    "Term": "Hash Table",
+    "Definition": "“A data structure where the calculated value is used to mark the position in the table where the data item should be stored, enabling it to be accessed directly, rather than forcing a sequential search.”"
+  },
+  {
+    "No.": "187.",
+    "Spec": "1.4.3a",
+    "Section": "Boolean algebra",
+    "Term": "Boolean Logic",
+    "Definition": "“Named after the nineteenth-century mathematician George Boole, Boolean logic is a form of algebra in which all values are reduced to either TRUE or FALSE.”"
+  },
+  {
+    "No.": "188.",
+    "Spec": "1.4.3b",
+    "Section": "Boolean algebra",
+    "Term": "Karnaugh Maps",
+    "Definition": "“Also know as the K-Map, is a method to simplify Boolean algebra expressions.  The Karnaugh map reduces the need for extensive calculations by taking advantage of humans’ pattern-recognition capability.  They are used to simplify real-word logic requirements so that they can be implemented using a minimum number of physical logic gates.”"
+  },
+  {
+    "No.": "189.",
+    "Spec": "1.4.3c",
+    "Section": "Boolean algebra",
+    "Term": "Boolean Algebra",
+    "Definition": "“A set of rules for manipulating truth values according to truth tables.  Very important in computing as truth values in Boolean algebra are True and false, and can thus easily be represented as the binary digits 1 and 0.”"
+  },
+  {
+    "No.": "190.",
+    "Spec": "1.4.3c",
+    "Section": "Boolean algebra",
+    "Term": "De Morgan’s Law",
+    "Definition": "“Two laws in Boolean algebra which state that AND and OR, or union and intersections, are duel.  The rules can be expressed in English as 1) ‘The negation of a conjunction is the disjunction of the negations. 2) ‘The negation of a disjunction is the conjunction of the negations.’  Or more informally as 1) \"not (A and B)\" is the same as \"(not A) or (not B)\" and also 2) \"not (A or B)\" is the same as \"(not A) and (not B)\".The purpose of De Morgan’s laws is to simplify the design of electronic circuits.”,\n191.   ,1.4.3c,Boolean algebra,Distribution,“A rule or law in Boolean algebra which permits the multiplying or factoring out of an expression.”,\n192.   ,1.4.3c,Boolean algebra,Association,“A rule or law in Boolean algebra which permits the removal of brackets from an expression and regrouping of the variables.”,\n193.   ,1.4.3c,Boolean algebra,Commutation,“A rule or law in Boolean algebra which stats that the order of application of two separate terms is not important: A AND B = B AND A.”,\n194.   ,1.4.3c,Boolean algebra,Double Negation,“A rule or law in Boolean algebra where if you invert a term twice it is equal to its original term: (NOT NOT A) = A”,\n195.   ,1.4.3d,Boolean algebra,Logic Gate Diagram,“A method of expression Boolean Logic in a diagrammatic form using a set of standard symbols representing the various Logic Gates such as AND NOT OR NAND etc.”"
+  },
+  {
+    "No.": "196.",
+    "Spec": "1.4.3d",
+    "Section": "Boolean algebra",
+    "Term": "Truth Table",
+    "Definition": "“A notation used in Boolean algebra for defining the output of a logic gate or logic circuit for all possible combinations of inputs.”"
+  },
+  {
+    "No.": "197.",
+    "Spec": "1.4.3e",
+    "Section": "Boolean algebra",
+    "Term": "D Type Flip Flops",
+    "Definition": "“Also known as a data or delay flip flop.  This is a circuit or logic design which can be viewed as a memory cell.  It has two stable states.  Using appropriate input signals, you can trigger the flip-flop from one state to the other.”"
+  },
+  {
+    "No.": "198.",
+    "Spec": "1.4.3e",
+    "Section": "Boolean algebra",
+    "Term": "Half Adders",
+    "Definition": "“A unit which adds together two input variables.  A half adder can only add the inputs together.”"
+  },
+  {
+    "No.": "199.",
+    "Spec": "1.4.3e",
+    "Section": "Boolean algebra",
+    "Term": "Full Adders",
+    "Definition": "“A unit which adds together two input variables.  A full adder can a bit carried from another addition as well as the two inputs.”"
+  },
+  {
+    "No.": "200.",
+    "Spec": "1.5.1a",
+    "Section": "Computing related legislation",
+    "Term": "DPA",
+    "Definition": "The Data Protection Act 1998: “Legislation which protects individuals from unreasonable use of their store personal data.”"
+  },
+  {
+    "No.": "201.",
+    "Spec": "1.5.1b",
+    "Section": "Computing related legislation",
+    "Term": "CMA",
+    "Definition": "The Computer Misuse Act 1990: “Legislation which defines electronic vandalism, unauthorised access to computer systems and theft of information.”"
+  },
+  {
+    "No.": "202.",
+    "Spec": "1.5.1c",
+    "Section": "Computing related legislation",
+    "Term": "CDPA",
+    "Definition": "The Copyright Design and Patents Act 1988: “Legislation which gives creators of literacy, dramatic, musical and artistic works the right to control the ways in which their material may be used.”"
+  },
+  {
+    "No.": "203.",
+    "Spec": "1.5.1d",
+    "Section": "Computing related legislation",
+    "Term": "RIPA",
+    "Definition": "The Regulation of Investigatory Powers Act 2000: “Legislation which regulates the powers of public bodies to carry out surveillance and investigation, and covering interception of communications.”"
+  },
+  {
+    "No.": "204.",
+    "Spec": "2.1.1a",
+    "Section": "Thinking abstractly",
+    "Term": "Abstraction",
+    "Definition": "“The process of separating ideas from specific instances of those ideas at work.  Computational structures are defined by their meanings, while hiding away the details of how they work.  Abstraction tries to factor out details from a common pattern so that programmers can work close to the level of human thoughts, leaving out details which matter in practice, but are immaterial to the problem being solved.”"
+  },
+  {
+    "No.": "205.",
+    "Spec": "2.1.1d",
+    "Section": "Thinking abstractly",
+    "Term": "Abstract Model",
+    "Definition": "“Any model of a system which has been taken from, or based on (abstracted) a real life situation or problem.”"
+  },
+  {
+    "No.": "206.",
+    "Spec": "2.1.2a",
+    "Section": "Thinking ahead",
+    "Term": "System Inputs",
+    "Definition": "“Anything which will be required to go into a system in any form in order for it to operate as intended.  These inputs are then processed by the system following the rules or algorithms of the system.”"
+  },
+  {
+    "No.": "207.",
+    "Spec": "2.1.2b",
+    "Section": "Thinking ahead",
+    "Term": "System Outputs",
+    "Definition": "“Anything which exits a system in any form in order for it to operate as intended.  These outputs are often the result of complex processing of inputs along with other data.”"
+  },
+  {
+    "No.": "208.",
+    "Spec": "2.1.2b",
+    "Section": "Thinking ahead",
+    "Term": "Solution Preconditions",
+    "Definition": "“Any condition which pre-exists the suggested solution.  For example for a road traffic speed camera program their would be pre-conditions which could be as simple as requiring a road in place and a vehicle traveling along it.”"
+  },
+  {
+    "No.": "209.",
+    "Spec": "2.1.5b",
+    "Section": "Thinking concurrently",
+    "Term": "Concurrent Processing",
+    "Definition": "“Any situation in the design or programming of a system when you would want more than one thing happening at the same time.”"
+  },
+  {
+    "No.": "210.",
+    "Spec": "2.2.1a",
+    "Section": "Programming techniques",
+    "Term": "Sequence",
+    "Definition": "“One of the 3 basic programming constructs.  Instructions happening one after the other in order is sequence.”"
+  },
+  {
+    "No.": "211.",
+    "Spec": "2.2.1a",
+    "Section": "Programming techniques",
+    "Term": "Iteration",
+    "Definition": "“One of the 3 basic programming constructs.  A selection of code which can be repeated either a set number of times (count controlled) or a variable number of times based on the evaluation of a Boolean expression (condition controlled) is iteration.”"
+  },
+  {
+    "No.": "212.",
+    "Spec": "2.2.1a",
+    "Section": "Programming techniques",
+    "Term": "Branching / Selection",
+    "Definition": "“One of the 3 basic programming constructs.  Instructions which can evaluate a Boolean expression and then branch the code to one or more alternatives paths is branching / selection.”"
+  },
+  {
+    "No.": "213.",
+    "Spec": "2.2.1b",
+    "Section": "Programming techniques",
+    "Term": "Recursion",
+    "Definition": "“An advanced programming construct in which a block of code (often a function) is able to call itself.  Recursion algorithms must be designed carefully so that terminating condition will be met.”"
+  },
+  {
+    "No.": "214.",
+    "Spec": "2.2.1c",
+    "Section": "Programming techniques",
+    "Term": "Global Variable",
+    "Definition": "“A variable which can be used anywhere in the program.”"
+  },
+  {
+    "No.": "215.",
+    "Spec": "2.2.1c",
+    "Section": "Programming techniques",
+    "Term": "Local Variable",
+    "Definition": "“A variable which is defined and can only be used within one part of the program (normally a single function or procedure).”"
+  },
+  {
+    "No.": "216.",
+    "Spec": "2.2.1d",
+    "Section": "Programming techniques",
+    "Term": "Modularity",
+    "Definition": "“A technique of code design where a solution is broken down into a number of small self-contained and manageable chunks.  Each Module of code should be designed to perform one set specific purpose.  If during design it is found that the module starts to grow and performs more than one task then the additional functionality should be split out into a new module.”"
+  },
+  {
+    "No.": "217.",
+    "Spec": "2.2.1d",
+    "Section": "Programming techniques",
+    "Term": "Functions",
+    "Definition": "“A block of code given a unique identifiable name within a program.  A function can take either zero or more parameters when it is called and should return a value.  The function should be designed and written to perform one task or action which is clearly indicated by its name.”"
+  },
+  {
+    "No.": "218.",
+    "Spec": "2.2.1d",
+    "Section": "Programming techniques",
+    "Term": "Procedures",
+    "Definition": "“A block of code given a unique identifiable name within a program.  A procedure can take either zero or more parameters when it is called.  The procedure should be designed and written to perform one task or action which is clearly indicated by its name.”"
+  },
+  {
+    "No.": "219.",
+    "Spec": "2.2.1d",
+    "Section": "Programming techniques",
+    "Term": "Parameters",
+    "Definition": "“Data structures passed into a Procedure or Function when they are initially called.”"
+  },
+  {
+    "No.": "220.",
+    "Spec": "2.2.1d",
+    "Section": "Programming techniques",
+    "Term": "Parameter Passing",
+    "Definition": "“The process of providing a procedure, function or module with values at the point when you call it.”"
+  },
+  {
+    "No.": "221.",
+    "Spec": "2.2.1d",
+    "Section": "Programming techniques",
+    "Term": "-          By Value",
+    "Definition": "“If a data item is passed by value, a (local) copy of the data is used, which is discarded when the subprogram exits.”"
+  },
+  {
+    "No.": "222.",
+    "Spec": "2.2.1d",
+    "Section": "Programming techniques",
+    "Term": "-          By Reference",
+    "Definition": "“If a data item is passed by reference, the location (in memory) of the data is used.  This means that any changes are retained after the procedure or function has been completed.”"
+  },
+  {
+    "No.": "223.",
+    "Spec": "2.2.1e",
+    "Section": "Programming techniques",
+    "Term": "IDE",
+    "Definition": "Integrated Development Environment: “Software that performs the various stages of software design and implementation in a single integrated system.  It will usually include facilities for project management, design, graphical design, programming, testing and producing documentation.”"
+  },
+  {
+    "No.": "224.",
+    "Spec": "2.2.1e",
+    "Section": "Programming techniques",
+    "Term": "Debugging",
+    "Definition": "“The process of removing syntactical, semantic (logical) and run-time errors from computer code.”"
+  },
+  {
+    "No.": "225.",
+    "Spec": "2.2.2a",
+    "Section": "Computational methods",
+    "Term": "Computational Methods",
+    "Definition": "“Describes any method which does something related to computation, such as sorting, merging, searching, indexing etc.”"
+  },
+  {
+    "No.": "226.",
+    "Spec": "2.2.2b",
+    "Section": "Computational methods",
+    "Term": "Problem Recognition",
+    "Definition": "“The acknowledgement and definition of an issue that does or may arise during the performance of a process.”"
+  },
+  {
+    "No.": "227.",
+    "Spec": "2.2.2c",
+    "Section": "Computational methods",
+    "Term": "Problem Decomposition",
+    "Definition": "“The process by which a complex problem or system is broken down into parts that are easier to conceive, understand, program and maintain.”"
+  },
+  {
+    "No.": "228.",
+    "Spec": "2.2.2d",
+    "Section": "Computational methods",
+    "Term": "Divide and Conquer",
+    "Definition": "“Another term for decomposition which is the process by which a complex problem or system are broken down into parts that are easier to conceive, understand, program and maintain.”"
+  },
+  {
+    "No.": "229.",
+    "Spec": "2.2.2f",
+    "Section": "Computational methods",
+    "Term": "Backtracking",
+    "Definition": "“An algorithm for finding a complete solution.  This is a refined brute force methodology.  It is a very general algorithm for finding all (or some) solutions to computational problems.  It incrementally builds to the solution, and abandons each partial success (“backtracks”) as soon as it determines that the partial solution cannot possible be completed to a valid solution.”"
+  },
+  {
+    "No.": "230.",
+    "Spec": "2.2.2f",
+    "Section": "Computational methods",
+    "Term": "Data Mining",
+    "Definition": "“The analysis of a large amount of data in a data warehouse to provide new information.  For example, by using loyalty cards, which connect purchases to a particular customer, supermarkets can gathering information about the buying habits of individual customers.”"
+  },
+  {
+    "No.": "231.",
+    "Spec": "2.2.2f",
+    "Section": "Computational methods",
+    "Term": "Heuristics",
+    "Definition": "“Rules that are not derived purely from logic but are derived from the experience (of a person).  These are also known as ‘rules of thumb’.”"
+  },
+  {
+    "No.": "232.",
+    "Spec": "2.2.2f",
+    "Section": "Computational methods",
+    "Term": "Performance Modelling",
+    "Definition": "“This is the process of carrying out mathematical approximations of how well models perform.  e.g. How efficient they are.”"
+  },
+  {
+    "No.": "233.",
+    "Spec": "2.2.2f",
+    "Section": "Computational methods",
+    "Term": "Visualisation",
+    "Definition": "“The process of turning data in a visual representation which is easier for humans to understand, interrupt and work with.”"
+  },
+  {
+    "No.": "234.",
+    "Spec": "2.3.1a",
+    "Section": "Algorithms",
+    "Term": "Algorithm",
+    "Definition": "“A sequence of steps designed to perform a particular task.  An algorithm may be constructed to describe the operation of a complete system or to describe a particular part of it.”"
+  },
+  {
+    "No.": "235.",
+    "Spec": "2.3.1c",
+    "Section": "Algorithms",
+    "Term": "Big O Notation",
+    "Definition": "“Used in computer science to describe the performance or complexity of an algorithm.  Big-O specifically described the worst-case scenario, and can be used to describe the execution time required or the space used (e.g. in memory or on disk) by an algorithm.”"
+  },
+  {
+    "No.": "236.",
+    "Spec": "2.3.1f",
+    "Section": "Algorithms",
+    "Term": "Bubble Sort",
+    "Definition": "“A simple algorithm popular with inexperienced programmers.  It is inefficient when sorting large amounts of data as the time taken is related to the square of the number of items.  If 10 items take 1ms then 100 times will take 100ms (this is 10 times the number of items and so the time will be 102 or 100 times longer).”"
+  },
+  {
+    "No.": "237.",
+    "Spec": "2.3.1f",
+    "Section": "Algorithms",
+    "Term": "Insertion Sort",
+    "Definition": "“A simple sorting algorithm that builds the final sorted array (or list) one item at time.  It is much less efficient on large lists than more advanced algorithms such as quicksort, heapsort, or merge sort.”"
+  },
+  {
+    "No.": "238.",
+    "Spec": "2.3.1f",
+    "Section": "Algorithms",
+    "Term": "Merge Sort",
+    "Definition": "“A type of divide and conquer algorithm that was incited by John von Neumann.  First the list is divided into the smallest unit (1 element), then each element is compared with the adjacent list to sort and merge the two adjacent lists.  Finally all elements are sorted and merged.”"
+  },
+  {
+    "No.": "239.",
+    "Spec": "2.3.1f",
+    "Section": "Algorithms",
+    "Term": "Quick Sort",
+    "Definition": "“A type of divide and conquer algorithm which sorts the given sequence in place meaning that it doesn’t require extra storage as would be needed in a merge sort.  The basic idea is dividing the sequence into two sub-lists around an element which is called the pivot such that all elements in the lower sub-list are less than the value of the pivot element and all elements in the higher sub-list are greater than the pivot element.”"
+  },
+  {
+    "No.": "240.",
+    "Spec": "2.3.1f",
+    "Section": "Algorithms",
+    "Term": "Dijkstra’s Shortest Path",
+    "Definition": "“A graph search algorithm that solves the single-source shortest path problem for a graph with non-negative edge path costs, producing a shortest path tree.  This algorithm is often used in routing and as a subroutine in other graph algorithms.  In practice in picks an unvisited vertex with the lowest-distance, calculates the distance through it to each unvisited neighbour, and updates the neighbours distance if smaller.  It the marks the visited when done with neighbours.”"
+  },
+  {
+    "No.": "241.",
+    "Spec": "2.3.1f",
+    "Section": "Algorithms",
+    "Term": "A* Algorithm",
+    "Definition": "“Widely used in pathfinding and graph traversal, the process of plotting an efficiently traversable path between points, called nodes.  A* uses a best-first search and finds a least-cost path from a given initial node to one goal node (out of one or more possible goals). As A* traverses the graph, it follows a path of the lowest expected total cost or distance, keeping a sorted priority queue of alternate path segments along the way.”"
+  },
+  {
+    "No.": "242.",
+    "Spec": "2.3.1f",
+    "Section": "Algorithms",
+    "Term": "Binary Search",
+    "Definition": "“A particularly efficient search method.  It only works if records in the file are in sequence.  A binary search involvers accessing the middle record in the file and determining if the target record has been found or, if not, if it is before or after in the sequence.  This process is repeated on the part of the file where the target record is expected, until it is found.”"
+  },
+  {
+    "No.": "243.",
+    "Spec": "2.3.1f",
+    "Section": "Algorithms",
+    "Term": "Linear Search",
+    "Definition": "“Involves examining each entry in turn in the file until the time is found or the end of the file is reached.  Unless the file is in some useful order a serial search has to be used.”"
+  }
+]
+
+
+var qNum = 0;
+function getRandQ(){
+qNum = Math.floor(Math.random() * (data.length) );
+//qNum = getRndInteger(min, data.length)
+
+document.getElementById("question").innerHTML = (qNum + 1) + ")  " + data[qNum].Spec + "   "  + data[qNum].Section + "  <br>" + data[qNum].Term
+document.getElementById("answer").innerHTML = "";
+}
+function getAns(){
+document.getElementById("answer").innerHTML = data[qNum].Definition;
+}
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min) ) + min;
+}
+</script>
+<button onclick="getRandQ()">Get Term</button>
+<button onclick="getAns()">Get Definition</button>
+
+</body>
+</html>
